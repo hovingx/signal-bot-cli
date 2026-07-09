@@ -1,5 +1,7 @@
 """API client — thin wrapper around signal-bot.ai REST API."""
 
+from __future__ import annotations
+
 import os
 
 try:

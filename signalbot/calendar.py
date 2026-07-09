@@ -1,5 +1,7 @@
 """Economic calendar command."""
 
+from __future__ import annotations
+
 from signalbot.api import get
 from signalbot.utils import print_table, IMPACT_ICON
 

@@ -12,6 +12,8 @@ Add --json for machine-readable output (agent-friendly, parseable).
 Get your free API key at https://signal-bot.ai/contact
 """
 
+from __future__ import annotations
+
 import argparse
 import json
 import sys

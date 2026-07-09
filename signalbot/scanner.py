@@ -1,5 +1,7 @@
 """Memecoin scanner command."""
 
+from __future__ import annotations
+
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from signalbot.api import get, get_key
 from signalbot.utils import fmt_price, print_table

@@ -1,5 +1,7 @@
 """Trading signals command."""
 
+from __future__ import annotations
+
 from signalbot.api import get, SignalBotError
 from signalbot.utils import fmt_price, print_table
 
