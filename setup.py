@@ -14,6 +14,12 @@ setup(
         "requests>=2.28",
         "tabulate>=0.9",
     ],
+    extras_require={
+        "dev": [
+            "pytest>=7",
+            "ruff>=0.8",
+        ],
+    },
     entry_points={
         "console_scripts": [
             "signal-bot=signalbot.cli:main",

@@ -10,11 +10,16 @@ except ImportError:
 API_BASE = "https://api.signal-bot.ai/api/v1"
 
 
+class SignalBotError(Exception):
+    """Expected user-facing error (e.g. missing key, invalid key, rate limit)."""
+    pass
+
+
 def get_key(key_override: str | None = None) -> str:
     """Resolve API key: explicit arg > SIGNALBOT_KEY env."""
     key = key_override or os.environ.get("SIGNALBOT_KEY", "")
     if not key:
-        raise SystemExit(
+        raise SignalBotError(
             "🔑 No API key found.\n\n"
             "Set it once:\n"
             "  export SIGNALBOT_KEY=your_key_here\n\n"
@@ -27,7 +32,7 @@ def get_key(key_override: str | None = None) -> str:
 
 def _ensure_requests():
     if requests is None:
-        raise SystemExit(
+        raise SignalBotError(
             "Missing dependency: requests\n"
             "Install it: pip install requests"
         )
@@ -40,8 +45,8 @@ def get(endpoint: str, params: dict | None = None, key: str | None = None) -> di
     url = f"{API_BASE}/{endpoint}"
     resp = requests.get(url, headers={"X-API-Key": key}, params=params, timeout=30)
     if resp.status_code == 401:
-        raise SystemExit("❌ Invalid API key. Get one at https://signal-bot.ai/contact")
+        raise SignalBotError("❌ Invalid API key. Get one at https://signal-bot.ai/contact")
     if resp.status_code == 429:
-        raise SystemExit("⏳ Rate limited. Wait a moment and try again.")
+        raise SignalBotError("⏳ Rate limited. Wait a moment and try again.")
     resp.raise_for_status()
     return resp.json()

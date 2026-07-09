@@ -2,8 +2,10 @@
 
 Real-time trading signals & market data — right in your terminal.
 
+[![CI](https://github.com/hovingx/signal-bot-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/hovingx/signal-bot-cli/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://python.org)
+[![Tests](https://img.shields.io/badge/tests-12%2F12-brightgreen)](tests/)
 
 ---
 
@@ -133,6 +135,32 @@ signal-bot keys
 
 ---
 
+## `--json` Output (for scripts & AI agents)
+
+Every command supports `--json` for machine-readable output. Use this to pipe data into scripts, dashboards, or AI agents (Claude, ChatGPT, Cursor, Copilot, etc.).
+
+```bash
+# JSON output — parseable by any script or agent
+signal-bot --json signals forex | jq '.signals[] | select(.confidence > 70)'
+
+signal-bot --json scanner sol | jq '.signals[] | select(.signal == "HIGH_CONVICTION")'
+
+signal-bot --json calendar | jq '.events[] | select(.impact == "high")'
+```
+
+**Agent use cases:**
+- **Trading assistant**: pipe scanner output to an LLM for narrative analysis
+- **Backtesting**: export signals to CSV with `--json` → `jq` → pandas
+- **Alert bots**: cron + `signal-bot --json` + Telegram/Discord/email webhook
+- **Dashboard**: pipe JSON into a Grafana panel, Streamlit app, or Google Sheets
+
+Errors also output as JSON when `--json` is set:
+```json
+{"error": "❌ Invalid API key. Get one at https://signal-bot.ai/contact"}
+```
+
+---
+
 ## Authentication
 
 Set your API key once:
@@ -180,19 +208,30 @@ Both are installed automatically with `pip install .`
 signal-bot-cli/
 ├── signalbot/
 │   ├── __init__.py     # Package root
-│   ├── cli.py          # argparse entry point
-│   ├── api.py          # API client (requests wrapper)
+│   ├── cli.py          # argparse entry point, --json flag handling
+│   ├── api.py          # API client (requests wrapper, auth, error handling)
 │   ├── signals.py      # Trading signals handler
-│   ├── scanner.py      # Memecoin scanner handler (concurrent)
+│   ├── scanner.py      # Memecoin scanner handler (concurrent, 5 chains)
 │   ├── calendar.py     # Economic calendar handler
-│   └── utils.py        # Formatting helpers
+│   └── utils.py        # Formatting helpers (price, tables)
+├── tests/
+│   └── test_cli.py     # Smoke tests (CLI interface + JSON validation)
+├── .github/workflows/
+│   └── ci.yml          # CI pipeline (lint + test, Python 3.9–3.12)
 ├── examples/           # Shell scripts (CLI usage)
 ├── setup.py            # pip install entry point
+├── pyproject.toml      # Pytest config
+├── CONTRIBUTING.md     # How to contribute
+├── CODE_OF_CONDUCT.md  # Contributor covenant
 ├── LICENSE             # MIT
 └── README.md           # ← you are here
 ```
 
 ---
+
+## Contributing
+
+Pull requests are welcome! See [`CONTRIBUTING.md`](CONTRIBUTING.md) for details on the development workflow.
 
 ## License
 
