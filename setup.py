@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="signal-bot-cli",
-    version="1.0.1",
+    version="1.0.2",
     description="signal-bot.ai CLI — real-time trading signals & market data in your terminal",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
@@ -11,7 +11,6 @@ setup(
     url="https://signal-bot.ai",
     project_urls={
         "Source": "https://github.com/hovingx/signal-bot-cli",
-        "Documentation": "https://signal-bot.ai",
         "Tracker": "https://github.com/hovingx/signal-bot-cli/issues",
     },
     packages=find_packages(),
