@@ -1,6 +1,6 @@
 """Trading signals command."""
 
-from signalbot.api import get, get_key, SignalBotError
+from signalbot.api import get, SignalBotError
 from signalbot.utils import fmt_price, print_table
 
 VALID_MARKETS = ("forex", "crypto", "stocks", "binary")
