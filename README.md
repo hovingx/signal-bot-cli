@@ -3,6 +3,7 @@
 Real-time trading signals & market data — right in your terminal.
 
 [![CI](https://github.com/hovingx/signal-bot-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/hovingx/signal-bot-cli/actions)
+[![PyPI](https://img.shields.io/pypi/v/signal-bot-cli?color=blue)](https://pypi.org/project/signal-bot-cli/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://python.org)
 [![Tests](https://img.shields.io/badge/tests-12%2F12-brightgreen)](tests/)
@@ -10,6 +11,12 @@ Real-time trading signals & market data — right in your terminal.
 ---
 
 ## Install
+
+```bash
+pip install signal-bot-cli
+```
+
+Or from source:
 
 ```bash
 git clone https://github.com/hovingx/signal-bot-cli

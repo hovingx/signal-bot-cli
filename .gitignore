@@ -23,3 +23,8 @@ Thumbs.db
 
 # Environment
 .env
+
+# Build artifacts
+dist/
+*.egg-info/
+.venv/
